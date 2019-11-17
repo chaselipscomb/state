@@ -1,4 +1,6 @@
-const array = [
+const array = []
+module.exports = {
+    array = [
     {
         "image": "http://img.bbystatic.com/BestBuy_US/images/products/1792/17929789_sa.jpg",
         "name": "Fabriclive.46 [CD]",
@@ -208,4 +210,4 @@ const array = [
         "customerReviewAverage": 4.5
     }
 ]
-export default array
+}

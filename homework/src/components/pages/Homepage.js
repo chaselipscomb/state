@@ -39,12 +39,19 @@ function Home() {
 
     console.log(thingsearched)
 
+    let image;
+    let name;
+    let price;
+    let link;
+    let reviews;
     API.findAll(thingsearched)
         .then(res => {
             /*if (res.data.status === "error") {
                 throw new Error(res.data.message);
             }*/
             console.log(res)
+            //console.log(res[0].name)
+            //name = res[0].name;
             //this.setState({ users: res.data.results, error: "" });
         })
         //.catch(err => this.setState({ error: err.message }));
@@ -60,11 +67,18 @@ function Home() {
       </Form>
       <Container style={row}>
         <Row>
-          <Col style={text}>picture</Col>
+          <Col style={text}>image</Col>
           <Col style={text}>name</Col>
-          <Col style={text}>phone</Col>
-          <Col style={text}>email</Col>
-          <Col style={text}>dob</Col>
+          <Col style={text}>saleprice</Col>
+          <Col style={text}>link</Col>
+          <Col style={text}>reviews</Col>
+        </Row>
+        <Row>
+          <Col style={text}>image</Col>
+          <Col style={text}>name</Col>
+          <Col style={text}>saleprice</Col>
+          <Col style={text}>link</Col>
+          <Col style={text}>reviews</Col>
         </Row>
       </Container>
     </React.Fragment>

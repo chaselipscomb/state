@@ -4,7 +4,7 @@ import React from 'react';
 function Cart() {
   return (
     <React.Fragment> 
-      <h1>Cart Page</h1>
+      <center><h1>Cart Page</h1></center>
     </React.Fragment>
    );
 }

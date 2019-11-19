@@ -1,11 +1,10 @@
-import React, { useRef } from 'react';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import React, { useRef, useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import API from "../utils/API";
+import { Button, Card } from 'react-bootstrap';
 
+//const placeholderpicture = MYPICTURE;
 
 const centertext = {
   textAlign: "center"
@@ -13,23 +12,38 @@ const centertext = {
 const centercontent = {
   alignContent: "center"
 }
-const row = {
-  backgroundColor: 'lightblue',
-  height: 'auto',
-};
-/*const picture = {
-  padding: '5px',
-  textAlign: 'center',
-  marginLeft: '30px'
 
-};*/
-const text = {
-  textAlign: 'center',
-  padding: '25px'
-
+const picturewidth = {
+  width: "286px"
 }
 
+
 function Home() {
+
+  const [itemState, setItemState] = useState({
+    image: 10000,
+    name: "Chase",
+    saleprice: "excited",
+    link: "Alec",
+    reviews: "5 stars"
+  });
+
+function loadAll() {
+    API.loadItems()
+        .then(res => {
+          console.log(res)
+          setItemState({ 
+         name: res.name,
+         image: res.image,
+         saleprice: res.salePrice,
+         link: res.url,
+         reviews: res.customerReviewAverage
+
+        })})
+        .catch(err => console.log(err));
+}
+
+useEffect(loadAll, [])
 
   let texInput = useRef();
   const handleFormSubmit = (event) => {
@@ -39,48 +53,41 @@ function Home() {
 
     console.log(thingsearched)
 
-    let image;
-    let name;
-    let price;
-    let link;
-    let reviews;
+    
     API.findAll(thingsearched)
-        .then(res => {
-            /*if (res.data.status === "error") {
-                throw new Error(res.data.message);
-            }*/
-            console.log(res)
-            //console.log(res[0].name)
-            //name = res[0].name;
-            //this.setState({ users: res.data.results, error: "" });
-        })
-        //.catch(err => this.setState({ error: err.message }));
-  };
+    .then(res => {
+      console.log(res)
+       setItemState({ 
+      name: res[0].name,
+     image: res[0].image,
+     saleprice: res[0].salePrice,
+     link: res[0].url,
+     reviews: res[0].customerReviewAverage
 
-
+     })
+  })
+    .catch(err => console.log(err));
+}
+  
   return (
     <React.Fragment>
       <h1 style={centertext}>Home Page</h1>
-      <Form inline style={centercontent}>
-        <FormControl ref={texInput} type="text" placeholder="Search something..." className="mr-sm-2" />
+      <Form style={centercontent}>
+        <FormControl ref={texInput} type="text" placeholder="Search items by exact name..." className="mr-sm-2" />
         <button onClick={handleFormSubmit}>submit</button>
       </Form>
-      <Container style={row}>
-        <Row>
-          <Col style={text}>image</Col>
-          <Col style={text}>name</Col>
-          <Col style={text}>saleprice</Col>
-          <Col style={text}>link</Col>
-          <Col style={text}>reviews</Col>
-        </Row>
-        <Row>
-          <Col style={text}>image</Col>
-          <Col style={text}>name</Col>
-          <Col style={text}>saleprice</Col>
-          <Col style={text}>link</Col>
-          <Col style={text}>reviews</Col>
-        </Row>
-      </Container>
+      <center>
+      <Card style={{ width: '18rem' }}>
+  <Card.Img variant="top" src={itemState.image} style={picturewidth} />
+    <Card.Body>
+    <Card.Title>{itemState.name}</Card.Title>
+    <Card.Text>${itemState.saleprice}</Card.Text>
+    <Button variant="primary" href={itemState.link}>Item Link</Button>
+    <br></br><br></br>
+    <Button variant="secondary" href="/Cart">Add to Cart</Button>
+  </Card.Body>
+</Card>
+</center>
     </React.Fragment>
   );
 }

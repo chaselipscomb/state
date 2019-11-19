@@ -1,18 +1,33 @@
 module.exports = {
   findAll: async function (req, res) {
     if (req === "") {
-      req = "iphone";
+      req = "24 Days (DVD)";
     }
-    console.log(req)
+    //console.log(req)
 
     var newarray = [];
-
-    if (array[0].name === req) {
-      newarray.push(array[0]);
+    for(var i=0; i<array.length; i++) {
+    if (array[i].name === req) {
+      newarray.push(array[i]);
     };
-
+  }
 
     return newarray
+
+  },
+  loadItems: async function() {
+  //   const req="";
+  //   if (req === "") {
+  //     req = "24 Days (DVD)";
+  //   }
+  //   console.log(req)
+
+  //   var newarray = [];
+  //   for(var i=0; i<array.length; i++) {
+  //     newarray.push(array[i]);
+  // }
+
+    return array[0]
 
   }
 }

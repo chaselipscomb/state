@@ -17,6 +17,9 @@ const picturewidth = {
   width: "286px"
 }
 
+const floated = {
+  float: "left"
+}
 
 function Home() {
 
@@ -28,47 +31,48 @@ function Home() {
     reviews: "5 stars"
   });
 
-function loadAll() {
+  function loadAll() {
     API.loadItems()
-        .then(res => {
-          console.log(res)
-          setItemState({ 
-         name: res.name,
-         image: res.image,
-         saleprice: res.salePrice,
-         link: res.url,
-         reviews: res.customerReviewAverage
+      .then(res => {
+        console.log(res)
+        setItemState({
+          name: res.name,
+          image: res.image,
+          saleprice: res.salePrice,
+          link: res.url,
+          reviews: res.customerReviewAverage
 
-        })})
-        .catch(err => console.log(err));
-}
+        })
+      })
+      .catch(err => console.log(err));
+  }
 
-useEffect(loadAll, [])
+  useEffect(loadAll, [])
 
   let texInput = useRef();
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    let thingsearched="";
+    let thingsearched = "";
     thingsearched = texInput.current.value
 
     console.log(thingsearched)
 
-    
-    API.findAll(thingsearched)
-    .then(res => {
-      console.log(res)
-       setItemState({ 
-      name: res[0].name,
-     image: res[0].image,
-     saleprice: res[0].salePrice,
-     link: res[0].url,
-     reviews: res[0].customerReviewAverage
 
-     })
-  })
-    .catch(err => console.log(err));
-}
-  
+    API.findAll(thingsearched)
+      .then(res => {
+        console.log(res)
+        setItemState({
+          name: res[0].name,
+          image: res[0].image,
+          saleprice: res[0].salePrice,
+          link: res[0].url,
+          reviews: res[0].customerReviewAverage
+
+        })
+      })
+      .catch(err => console.log(err));
+  }
+
   return (
     <React.Fragment>
       <h1 style={centertext}>Home Page</h1>
@@ -76,18 +80,26 @@ useEffect(loadAll, [])
         <FormControl ref={texInput} type="text" placeholder="Search items by exact name..." className="mr-sm-2" />
         <button onClick={handleFormSubmit}>submit</button>
       </Form>
+      <p>Some exact names are:</p>
+      <ul style={floated}>
+        <li>CORDLESS HAND VACUUM</li>
+        <li>THERMO-ELECTRIC WINE COOLER 16-BOTTLES</li>
+        <li>TARGUS USB 3.0 SUPERSPEED DUAL VIDEO SMB</li>
+        <li>24 Days (DVD)</li>
+        <li>Fabriclive.46 [CD]</li>
+      </ul>
       <center>
-      <Card style={{ width: '18rem' }}>
-  <Card.Img variant="top" src={itemState.image} style={picturewidth} />
-    <Card.Body>
-    <Card.Title>{itemState.name}</Card.Title>
-    <Card.Text>${itemState.saleprice}</Card.Text>
-    <Button variant="primary" href={itemState.link}>Item Link</Button>
-    <br></br><br></br>
-    <Button variant="secondary" href="/Cart">Add to Cart</Button>
-  </Card.Body>
-</Card>
-</center>
+        <Card style={{ width: '18rem' }}>
+          <Card.Img variant="top" src={itemState.image} style={picturewidth} />
+          <Card.Body>
+            <Card.Title>{itemState.name}</Card.Title>
+            <Card.Text>${itemState.saleprice}</Card.Text>
+            <Button variant="primary" href={itemState.link}>Item Link</Button>
+            <br></br><br></br>
+            <Button variant="secondary" href="/Cart">Add to Cart</Button>
+          </Card.Body>
+        </Card>
+      </center>
     </React.Fragment>
   );
 }

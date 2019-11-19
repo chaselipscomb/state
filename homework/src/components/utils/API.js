@@ -72,7 +72,7 @@ const array = [
   },
   {
     "image": "https://pisces.bbystatic.com/image2/BestBuy_US/images/mp/products/4872/4872763_sa.jpg",
-    "name": "THERMO-ELECTRIC WINE COOLER (16-BOTTLES",
+    "name": "THERMO-ELECTRIC WINE COOLER 16-BOTTLES",
     "regularPrice": 229.99,
     "salePrice": 229.99,
     "thumbnailImage": "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/nonsku/default_hardlines_s.gif",

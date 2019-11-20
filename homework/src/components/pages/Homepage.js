@@ -5,7 +5,6 @@ import API from "../utils/API";
 import { Button, Card } from 'react-bootstrap';
 
 //const placeholderpicture = MYPICTURE;
-
 const centertext = {
   textAlign: "center"
 };
@@ -34,7 +33,7 @@ function Home() {
   function loadAll() {
     API.loadItems()
       .then(res => {
-        console.log(res)
+        //console.log(res)
         setItemState({
           name: res.name,
           image: res.image,
@@ -60,7 +59,7 @@ function Home() {
 
     API.findAll(thingsearched)
       .then(res => {
-        console.log(res)
+        //console.log(res)
         setItemState({
           name: res[0].name,
           image: res[0].image,
@@ -71,6 +70,9 @@ function Home() {
         })
       })
       .catch(err => console.log(err));
+  }
+  const cartfunction = (itemState) => {
+  API.addToCart(itemState)
   }
 
   return (
@@ -96,7 +98,7 @@ function Home() {
             <Card.Text>${itemState.saleprice}</Card.Text>
             <Button variant="primary" href={itemState.link}>Item Link</Button>
             <br></br><br></br>
-            <Button variant="secondary" href="/Cart">Add to Cart</Button>
+            <Button variant="secondary" onClick={cartfunction}>Add to Cart</Button>
           </Card.Body>
         </Card>
       </center>

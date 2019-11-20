@@ -1,3 +1,5 @@
+let cartarray = [];
+let item = {};
 module.exports = {
   findAll: async function (req, res) {
     if (req === "") {
@@ -6,29 +8,41 @@ module.exports = {
     //console.log(req)
 
     var newarray = [];
-    for(var i=0; i<array.length; i++) {
-    if (array[i].name === req) {
-      newarray.push(array[i]);
-    };
-  }
+    for (var i = 0; i < array.length; i++) {
+      if (array[i].name === req) {
+        newarray.push(array[i]);
+      };
+    }
 
     return newarray
 
   },
-  loadItems: async function() {
-  //   const req="";
-  //   if (req === "") {
-  //     req = "24 Days (DVD)";
-  //   }
-  //   console.log(req)
-
-  //   var newarray = [];
-  //   for(var i=0; i<array.length; i++) {
-  //     newarray.push(array[i]);
-  // }
-
+  loadItems: async function () {
     return array[0]
-
+  },
+  addToCart: async function (itemState) {
+    cartarray = [];
+    //console.log(itemState)
+    item = {
+      // name : itemState.name,
+      // image : itemState.image,
+      // saleprice : itemState.salePrice,
+      // link : itemState.url,
+      // reviews : itemState.customerReviewAverage
+      name : "Fabriclive.46 [CD]",
+      image : "http://img.bbystatic.com/BestBuy_US/images/products/1792/17929789_sa.jpg",
+      saleprice : 9.99,
+      link : "https://api.bestbuy.com/click/-/17929789/pdp",
+      reviews : null
+    }
+    console.log(item);
+    cartarray.push(item)
+    console.log(cartarray);
+    return cartarray;
+  },
+  loadCart: async function (itemsincart) {
+    itemsincart = cartarray;
+    return itemsincart;
   }
 }
 const array = [

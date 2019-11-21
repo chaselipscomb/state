@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import API from "../utils/API";
 import { Button, Card } from 'react-bootstrap';
 import { useCartContext } from "../utils/GlobalState";
+const API = require("../utils/API");
 
 let  itemsincart= [
   {

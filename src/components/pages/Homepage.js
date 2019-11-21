@@ -1,9 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
-import API from "../utils/API";
 import { Button, Card } from 'react-bootstrap';
 import { useCartContext } from "../utils/GlobalState";
+const API = require("../utils/API");
 
 //const placeholderpicture = MYPICTURE;
 const centertext = {

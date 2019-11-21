@@ -1,6 +1,6 @@
 let cartarray = [];
 let item = {};
-module.exports = {
+export default {
   findAll: async function (req, res) {
     if (req === "") {
       req = "24 Days (DVD)";

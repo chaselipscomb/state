@@ -24,12 +24,12 @@ function reducer(state, action) {
 
 function CartProvider({ value = [], ...props }) {
   const [state, dispatch] = useReducer(reducer, [{
-    image: "",
-    name: "",
-    saleprice: 0,
-    link: "",
-    reviews: 0
-  }]);
+  image: "",
+  name: "",
+  saleprice: 0,
+  link: "",
+  reviews: 0
+}]);
 
   return <Provider value={[state, dispatch]} {...props} />;
 }

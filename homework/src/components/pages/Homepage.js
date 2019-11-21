@@ -51,6 +51,7 @@ function Home() {
   }
 
 function addToCartglobal() {
+  
   state[0].name = itemState.name;
   state[0].image = itemState.image;
   state[0].saleprice = itemState.saleprice;

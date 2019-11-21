@@ -16,40 +16,27 @@ let  itemsincart= [
 
 function Cart() {
   const [state, dispatch] = useCartContext();
-  const [itemState, setItemState] = useState({
-    image: 10000,
-    name: "Chase",
-    saleprice: "excited",
-    link: "Alec",
-    reviews: "5 stars"
-  });
+  
   console.log(state)
 
   API.loadCart(itemsincart)
     .then(itemsincart => {
       console.log(itemsincart)
 
-      // setItemState({
-      //   name: itemsincart.name,
-      //   image: itemsincart.image,
-      //   saleprice: itemsincart.salePrice,
-      //   link: itemsincart.link,
-      //   reviews: itemsincart.reviews
-      // })
     })
   return (
     <React.Fragment>
       <center><h1>Cart Page</h1></center>
 
       {state.map(item => (
-        <Card style={{ width: '18rem' }}>
+        <center><Card style={{ width: '18rem' }}>
           <Card.Img variant="top" src={item.image} />
           <Card.Body>
             <Card.Title>{item.name}</Card.Title>
             <Card.Text>{item.saleprice}</Card.Text>
             <Button variant="primary" href={item.link}>Item Link</Button>
           </Card.Body>
-        </Card>
+        </Card></center>
       ))}
     </React.Fragment>
   );

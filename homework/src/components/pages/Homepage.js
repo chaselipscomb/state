@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import API from "../utils/API";
 import { Button, Card } from 'react-bootstrap';
+import { useCartContext } from "../utils/GlobalState";
 
 //const placeholderpicture = MYPICTURE;
 const centertext = {
@@ -21,13 +22,16 @@ const floated = {
 }
 
 function Home() {
+  const [state, dispatch] = useCartContext();
+  console.log(state)
+  console.log(dispatch)
 
   const [itemState, setItemState] = useState({
-    image: 10000,
-    name: "Chase",
-    saleprice: "excited",
-    link: "Alec",
-    reviews: "5 stars"
+    image: "",
+    name: "",
+    saleprice: "",
+    link: "",
+    reviews: ""
   });
 
   function loadAll() {
@@ -45,6 +49,16 @@ function Home() {
       })
       .catch(err => console.log(err));
   }
+
+function addToCartglobal() {
+  state[0].name = itemState.name;
+  state[0].image = itemState.image;
+  state[0].saleprice = itemState.saleprice;
+  state[0].link = itemState.link;
+  state[0].reviews = itemState.reviews;
+  console.log(state);
+
+}
 
   useEffect(loadAll, [])
 
@@ -72,7 +86,12 @@ function Home() {
       .catch(err => console.log(err));
   }
   const cartfunction = (itemState) => {
-  API.addToCart(itemState)
+    API.addToCart(itemState)
+  }
+
+  const addToCartClick = event => {
+    console.log(event);
+    API.addToCart(itemState);
   }
 
   return (
@@ -98,7 +117,7 @@ function Home() {
             <Card.Text>${itemState.saleprice}</Card.Text>
             <Button variant="primary" href={itemState.link}>Item Link</Button>
             <br></br><br></br>
-            <Button variant="secondary" onClick={cartfunction}>Add to Cart</Button>
+            <Button variant="secondary" onClick={addToCartglobal}>Add to Cart</Button>
           </Card.Body>
         </Card>
       </center>

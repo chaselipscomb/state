@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import API from "../utils/API";
 import { Button, Card } from 'react-bootstrap';
+import { useCartContext } from "../utils/GlobalState";
 
 let  itemsincart= [
   {
@@ -14,6 +15,7 @@ let  itemsincart= [
 
 
 function Cart() {
+  const [state, dispatch] = useCartContext();
   const [itemState, setItemState] = useState({
     image: 10000,
     name: "Chase",
@@ -21,9 +23,11 @@ function Cart() {
     link: "Alec",
     reviews: "5 stars"
   });
+  console.log(state)
 
   API.loadCart(itemsincart)
     .then(itemsincart => {
+      console.log(itemsincart)
 
       // setItemState({
       //   name: itemsincart.name,
@@ -37,7 +41,7 @@ function Cart() {
     <React.Fragment>
       <center><h1>Cart Page</h1></center>
 
-      {itemsincart.map(item => (
+      {state.map(item => (
         <Card style={{ width: '18rem' }}>
           <Card.Img variant="top" src={item.image} />
           <Card.Body>

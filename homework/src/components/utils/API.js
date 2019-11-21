@@ -20,7 +20,8 @@ module.exports = {
   loadItems: async function () {
     return array[0]
   },
-  addToCart: async function (itemState) {
+  addToCart: function (itemState) {
+    console.log(itemState)
     cartarray = [];
     //console.log(itemState)
     item = {
@@ -35,7 +36,7 @@ module.exports = {
       link : "https://api.bestbuy.com/click/-/17929789/pdp",
       reviews : null
     }
-    console.log(item);
+    //console.log(item);
     cartarray.push(item)
     console.log(cartarray);
     return cartarray;
